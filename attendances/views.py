@@ -15,3 +15,12 @@ class AttendanceList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class AttendanceDetail(generics.RetrieveDestroyAPIView):
+    """
+    Handles retrieving and deleting of attendances by id if owned
+    """
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = AttendanceSerializer
+    queryset = Attendance.objects.all()
