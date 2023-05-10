@@ -6,7 +6,8 @@ from .serializers import TourSerializer
 
 class TourList(generics.ListCreateAPIView):
     """
-    Lists tours or create a tour if logged in.
+    Lists tours and handles creation of a tour
+    if logged in as an admin
     """
     serializer_class = TourSerializer
     permission_classes = [
@@ -17,3 +18,13 @@ class TourList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class TourDetail(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Handles editing and deleting of tours by id
+    if the user is the owner
+    """
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = TourSerializer
+    queryset = Tour.objects.all()
