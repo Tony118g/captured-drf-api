@@ -1,5 +1,6 @@
 from django.db.models import Count
 from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from captured_drf_api.permissions import IsAdminOrReadOnly
 from .models import Tour
 from .serializers import TourSerializer
@@ -19,6 +20,11 @@ class TourList(generics.ListCreateAPIView):
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
+        DjangoFilterBackend,
+    ]
+
+    filterset_fields = [
+        'attendances__owner__profile',
     ]
 
     search_fields = [
