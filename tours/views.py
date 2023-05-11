@@ -1,5 +1,5 @@
 from rest_framework import generics, permissions
-from captured_drf_api.permissions import IsOwnerOrReadOnly
+from captured_drf_api.permissions import IsAdminOrReadOnly
 from .models import Tour
 from .serializers import TourSerializer
 
@@ -10,10 +10,7 @@ class TourList(generics.ListCreateAPIView):
     if logged in as an admin
     """
     serializer_class = TourSerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly,
-        permissions.IsAdminUser
-        ]
+    permission_classes = [IsAdminOrReadOnly]
     queryset = Tour.objects.all()
 
     def perform_create(self, serializer):
@@ -25,6 +22,6 @@ class TourDetail(generics.RetrieveUpdateDestroyAPIView):
     Handles editing and deleting of tours by id
     if the user is the owner
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAdminOrReadOnly]
     serializer_class = TourSerializer
     queryset = Tour.objects.all()
