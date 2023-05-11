@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from django.db.models import Count
+from rest_framework import generics, permissions, filters
 from captured_drf_api.permissions import IsAdminOrReadOnly
 from .models import Tour
 from .serializers import TourSerializer
@@ -11,7 +12,17 @@ class TourList(generics.ListCreateAPIView):
     """
     serializer_class = TourSerializer
     permission_classes = [IsAdminOrReadOnly]
-    queryset = Tour.objects.all()
+    queryset = Tour.objects.annotate(
+        attendance_count=Count('attendances', distinct=True)
+    ).order_by('-created_at')
+
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+    ordering_fields = [
+        'attendance_count',
+        'attendance__created_at',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -24,4 +35,6 @@ class TourDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     permission_classes = [IsAdminOrReadOnly]
     serializer_class = TourSerializer
-    queryset = Tour.objects.all()
+    queryset = Tour.objects.annotate(
+        attendance_count=Count('attendances', distinct=True)
+    ).order_by('-created_at')

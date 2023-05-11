@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Tour
+from attendances.models import Attendance
 
 
 class TourSerializer(serializers.ModelSerializer):
@@ -11,6 +12,8 @@ class TourSerializer(serializers.ModelSerializer):
     guide = serializers.CharField(default='currently unknown')
     is_owner = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    attendance_id = serializers.SerializerMethodField()
+    attendance_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
         if value.size > 2 * 1024 * 1024:
@@ -28,6 +31,15 @@ class TourSerializer(serializers.ModelSerializer):
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_attendance_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            attendance = Attendance.objects.filter(
+                owner=user, tour=obj
+            ).first()
+            return attendance.id if attendance else None
+        return None
 
     class Meta:
         model = Tour
@@ -47,4 +59,6 @@ class TourSerializer(serializers.ModelSerializer):
             'updated_at',
             'is_owner',
             'profile_id',
+            'attendance_id',
+            'attendance_count',
         ]
