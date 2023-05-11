@@ -17,8 +17,16 @@ class TourList(generics.ListCreateAPIView):
     ).order_by('-created_at')
 
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter,
     ]
+
+    search_fields = [
+        'title',
+        'country',
+        'city',
+    ]
+
     ordering_fields = [
         'attendance_count',
         'attendance__created_at',
