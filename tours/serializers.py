@@ -21,7 +21,7 @@ class TourSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Image size larger than 2MB!')
             if value.image.height > 4096:
                 raise serializers.ValidationError(
-                'Image height larger than 4096px!'
+                    'Image height larger than 4096px!'
                 )
             if value.image.width > 4096:
                 raise serializers.ValidationError(
@@ -51,7 +51,8 @@ class TourSerializer(serializers.ModelSerializer):
             'description',
             'country',
             'city',
-            'time_period',
+            'start_date',
+            'end_date',
             'guide',
             'price',
             'booking_means',

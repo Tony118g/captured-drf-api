@@ -19,7 +19,8 @@ class Tour(models.Model):
         blank=True,
         default='currently unknown'
         )
-    time_period = models.CharField(max_length=150)
+    start_date = models.DateField()
+    end_date = models.DateField()
     booking_means = models.CharField(max_length=255)
     image = models.ImageField(
         upload_to='images/', null=True, blank=True
