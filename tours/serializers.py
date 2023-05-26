@@ -8,6 +8,8 @@ class TourSerializer(serializers.ModelSerializer):
     Provides readability for tour data in API.
     """
 
+    start_date = serializers.DateField(default=None)
+    end_date = serializers.DateField(default=None)
     owner = serializers.ReadOnlyField(source='owner.username')
     guide = serializers.CharField(default='currently unknown')
     is_owner = serializers.SerializerMethodField()
