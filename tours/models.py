@@ -22,7 +22,7 @@ class Tour(models.Model):
     time_period = models.CharField(max_length=150)
     booking_means = models.CharField(max_length=255)
     image = models.ImageField(
-        upload_to='images/', default='../default_post_weccxi', blank=True
+        upload_to='images/', null=True, blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
