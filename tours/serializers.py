@@ -1,6 +1,9 @@
 from rest_framework import serializers
 from .models import Tour
 from attendances.models import Attendance
+from datetime import date, datetime, timedelta
+
+TOMORROW = date.today() + timedelta(days=1)
 
 
 class TourSerializer(serializers.ModelSerializer):
@@ -8,8 +11,16 @@ class TourSerializer(serializers.ModelSerializer):
     Provides readability for tour data in API.
     """
 
-    start_date = serializers.DateField(default=None)
-    end_date = serializers.DateField(default=None)
+    start_date = serializers.DateField(
+        error_messages={
+            'Invalid': 'Please input a valid date with format: dd/mm/yyyy.'
+            }
+        )
+    end_date = serializers.DateField(
+        error_messages={
+            'Invalid': 'Please input a valid date with format: dd/mm/yyyy.'
+            }
+        )
     owner = serializers.ReadOnlyField(source='owner.username')
     guide = serializers.CharField(default='currently unknown')
     is_owner = serializers.SerializerMethodField()
@@ -30,6 +41,20 @@ class TourSerializer(serializers.ModelSerializer):
                     'Image width larger than 4096px!'
                 )
         return value
+
+    def validate_start_date(self, value):
+        if value < TOMORROW:
+            raise serializers.ValidationError(
+                "Start date cannot be a present or past date."
+                )
+        return value
+
+    def validate(self, data):
+        if data['start_date'] > data['end_date']:
+            raise serializers.ValidationError(
+                {"end_date": "End date must be after start date."}
+                )
+        return data
 
     def get_is_owner(self, obj):
         request = self.context['request']
