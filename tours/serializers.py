@@ -13,12 +13,12 @@ class TourSerializer(serializers.ModelSerializer):
 
     start_date = serializers.DateField(
         error_messages={
-            'Invalid': 'Please input a valid date with format: dd/mm/yyyy.'
+            'invalid': 'Please input a valid date with format: dd/mm/yyyy.'
             }
         )
     end_date = serializers.DateField(
         error_messages={
-            'Invalid': 'Please input a valid date with format: dd/mm/yyyy.'
+            'invalid': 'Please input a valid date with format: dd/mm/yyyy.'
             }
         )
     owner = serializers.ReadOnlyField(source='owner.username')
