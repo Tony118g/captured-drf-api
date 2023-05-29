@@ -24,6 +24,7 @@ class TourSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     guide = serializers.CharField(default='currently unknown')
     is_owner = serializers.SerializerMethodField()
+    has_passed = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     attendance_id = serializers.SerializerMethodField()
     attendance_count = serializers.ReadOnlyField()
@@ -60,6 +61,9 @@ class TourSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.owner
 
+    def get_has_passed(self, obj):
+        return TOMORROW > obj.start_date
+
     def get_attendance_id(self, obj):
         user = self.context['request'].user
         if user.is_authenticated:
@@ -87,6 +91,7 @@ class TourSerializer(serializers.ModelSerializer):
             'created_at',
             'updated_at',
             'is_owner',
+            'has_passed',
             'profile_id',
             'attendance_id',
             'attendance_count',
