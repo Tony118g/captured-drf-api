@@ -1,4 +1,5 @@
 from rest_framework import generics, permissions
+from django_filters.rest_framework import DjangoFilterBackend
 from captured_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Attendance
 from .serializers import AttendanceSerializer
@@ -12,6 +13,13 @@ class AttendanceList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = AttendanceSerializer
     queryset = Attendance.objects.all()
+
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
+    filterset_fields = [
+        'tour',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
