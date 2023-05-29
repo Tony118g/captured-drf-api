@@ -8,10 +8,19 @@ class AttendanceSerializer(serializers.ModelSerializer):
     Provides readability for attendance data in API.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id')
+    profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
     class Meta:
         model = Attendance
-        fields = ['id', 'created_at', 'owner', 'tour']
+        fields = [
+            'id',
+            'created_at',
+            'owner',
+            'tour',
+            'profile_id',
+            'profile_image'
+        ]
 
     def create(self, validate_data):
         """
