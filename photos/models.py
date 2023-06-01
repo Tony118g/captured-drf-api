@@ -20,7 +20,7 @@ class Photo(models.Model):
         )
     description = models.TextField(blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_post_weccxi', blank=True
+        upload_to='images/'
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
