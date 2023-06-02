@@ -1,9 +1,10 @@
 from django.db.models import Count
-from rest_framework import generics, filters
+from rest_framework import generics, filters, status
 from django_filters.rest_framework import DjangoFilterBackend
 from captured_drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
+from rest_framework.response import Response
 
 
 class ProfileList(generics.ListAPIView):
@@ -42,7 +43,7 @@ class ProfileList(generics.ListAPIView):
     ]
 
 
-class ProfileDetail(generics.RetrieveUpdateAPIView):
+class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Handles retrieving and updating profiles by id if owned
     """
@@ -54,3 +55,13 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
         following_count=Count('owner__following', distinct=True)
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
+
+    # Idea of how to implement a delete method was taken from 
+    # https://studygyaan.com/django/delete-method-in-django-rest-framework
+    def delete(self, request, pk):
+        """
+        Deletes the profile owner's user account when the profile is deleted.
+        """
+        user = self.request.user
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
