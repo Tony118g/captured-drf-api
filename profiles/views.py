@@ -56,12 +56,9 @@ class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     ).order_by('-created_at')
     serializer_class = ProfileSerializer
 
-    # Idea of how to implement a delete method was taken from 
-    # https://studygyaan.com/django/delete-method-in-django-rest-framework
-    def delete(self, request, pk):
+    def perform_destroy(self, instance):
         """
         Deletes the profile owner's user account when the profile is deleted.
         """
-        user = self.request.user
+        user = instance.owner
         user.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
