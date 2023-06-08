@@ -8,7 +8,7 @@ from .serializers import PhotoSerializer
 
 class PhotoList(generics.ListCreateAPIView):
     """
-    Lists photos and handles creation of a photo if logged in
+    Lists photos and handles creation of a photo if logged in.
     """
 
     serializer_class = PhotoSerializer
@@ -48,7 +48,7 @@ class PhotoList(generics.ListCreateAPIView):
 
 class PhotoDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Handles retrieving, updating and deleting photos by id if owned
+    Handles retrieving, updating and deleting photos by id if owned.
     """
     serializer_class = PhotoSerializer
     permission_classes = [IsOwnerOrReadOnly]

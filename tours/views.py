@@ -9,7 +9,7 @@ from .serializers import TourSerializer
 class TourList(generics.ListCreateAPIView):
     """
     Lists tours and handles creation of a tour
-    if logged in as an admin
+    if logged in as an admin.
     """
     serializer_class = TourSerializer
     permission_classes = [IsAdminOrReadOnly]
@@ -45,7 +45,7 @@ class TourList(generics.ListCreateAPIView):
 class TourDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Handles editing and deleting of tours by id
-    if the user is the owner
+    if the user is the owner.
     """
     permission_classes = [IsAdminOrReadOnly]
     serializer_class = TourSerializer

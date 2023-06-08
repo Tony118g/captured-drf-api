@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Follower(models.Model):
     """
-    The model for followers, related to User
+    The model for followers, related to User.
     """
     owner = models.ForeignKey(
         User,
@@ -22,13 +22,13 @@ class Follower(models.Model):
         """
         Orders followers by date they were created
         from newest to oldest and ensures a user
-        can't follow the same user more than once
+        can't follow the same user more than once.
         """
         unique_together = ['owner', 'followed']
         ordering = ['-created_at']
 
     def __str__(self):
         """
-        Returns a string with the owner and followed fields
+        Returns a string with the owner and followed fields.
         """
         return f'{self.owner} {self.followed}'

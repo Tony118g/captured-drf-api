@@ -1,7 +1,4 @@
 from django.shortcuts import render
-# Imports
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# 3rd party:
 from rest_framework import generics, permissions
 from .models import Follower
 from .serializers import FollowerSerializer
@@ -24,7 +21,7 @@ class FollowerList(generics.ListCreateAPIView):
 
 class FollowerDetail(generics.RetrieveDestroyAPIView):
     """
-    Handles retrieving and deleting of followers by id if owned
+    Handles retrieving and deleting of followers by id if owned.
     """
     serializer_class = FollowerSerializer
     permission_classes = [

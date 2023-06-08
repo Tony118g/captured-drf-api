@@ -5,9 +5,8 @@ from followers.models import Follower
 
 class ProfileSerializer(serializers.ModelSerializer):
     """
-    Provides readability for profile data in API.
+    Serializes profile data.
     """
-
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     photos_count = serializers.ReadOnlyField()
@@ -16,10 +15,16 @@ class ProfileSerializer(serializers.ModelSerializer):
     following_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
+        """
+        Returns true if the user is the object owner.
+        """
         request = self.context['request']
         return request.user == obj.owner
 
     def get_following_id(self, obj):
+        """
+        Returns the id of profiles a user is following.
+        """
         user = self.context['request'].user
         if user.is_authenticated:
             following = Follower.objects.filter(

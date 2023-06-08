@@ -5,7 +5,7 @@ from likes.models import Like
 
 class LikeSerializer(serializers.ModelSerializer):
     """
-    Provides readability for like data in API.
+    Serializes like data.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
 

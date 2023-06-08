@@ -11,7 +11,6 @@ class ProfileList(generics.ListAPIView):
     """
     Lists all profiles.
     """
-
     queryset = Profile.objects.annotate(
         photos_count=Count('owner__photo', distinct=True),
         followers_count=Count(
@@ -45,9 +44,8 @@ class ProfileList(generics.ListAPIView):
 
 class ProfileDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Handles retrieving and updating profiles by id if owned
+    Handles retrieving and updating profiles by id if owned.
     """
-
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Profile.objects.annotate(
         photos_count=Count('owner__photo', distinct=True),

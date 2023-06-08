@@ -5,7 +5,7 @@ from likes.models import Like
 
 class PhotoSerializer(serializers.ModelSerializer):
     """
-    Provides readability for photo data in API.
+    Serializes photo data.
     """
 
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -19,6 +19,9 @@ class PhotoSerializer(serializers.ModelSerializer):
     comments_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
+        """
+        Validates whether the image is the correct size.
+        """
         if value.size > 2 * 1024 * 1024:
             raise serializers.ValidationError('Image size larger than 2MB!')
         if value.image.height > 4096:
@@ -32,10 +35,16 @@ class PhotoSerializer(serializers.ModelSerializer):
         return value
 
     def get_is_owner(self, obj):
+        """
+        Returns true if the user is the object owner.
+        """
         request = self.context['request']
         return request.user == obj.owner
 
     def get_like_id(self, obj):
+        """
+        Returns the id of the relevant like for the user and photo.
+        """
         user = self.context['request'].user
         if user.is_authenticated:
             like = Like.objects.filter(

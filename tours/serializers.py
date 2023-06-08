@@ -8,7 +8,7 @@ TOMORROW = date.today() + timedelta(days=1)
 
 class TourSerializer(serializers.ModelSerializer):
     """
-    Provides readability for tour data in API.
+    Serializes tour data.
     """
 
     start_date = serializers.DateField(
@@ -30,9 +30,14 @@ class TourSerializer(serializers.ModelSerializer):
     attendance_count = serializers.ReadOnlyField()
 
     def validate_image(self, value):
+        """
+        Validates whether the image is the correct size.
+        """
         if value:
             if value.size > 2 * 1024 * 1024:
-                raise serializers.ValidationError('Image size larger than 2MB!')
+                raise serializers.ValidationError(
+                    'Image size larger than 2MB!'
+                    )
             if value.image.height > 4096:
                 raise serializers.ValidationError(
                     'Image height larger than 4096px!'
@@ -44,6 +49,9 @@ class TourSerializer(serializers.ModelSerializer):
         return value
 
     def validate_start_date(self, value):
+        """
+        Validates whether the start date is a present or past date.
+        """
         if value < TOMORROW:
             raise serializers.ValidationError(
                 "Start date cannot be a present or past date."
@@ -51,6 +59,9 @@ class TourSerializer(serializers.ModelSerializer):
         return value
 
     def validate(self, data):
+        """
+        Validates whether the end date is before the start date.
+        """
         if data['start_date'] > data['end_date']:
             raise serializers.ValidationError(
                 {"end_date": "End date must be after start date."}
@@ -58,13 +69,22 @@ class TourSerializer(serializers.ModelSerializer):
         return data
 
     def get_is_owner(self, obj):
+        """
+        Returns true if the user is the object owner.
+        """
         request = self.context['request']
         return request.user == obj.owner
 
     def get_has_passed(self, obj):
+        """
+        Returns true if the object start date is a present or past date.
+        """
         return TOMORROW > obj.start_date
 
     def get_attendance_id(self, obj):
+        """
+        Returns the id of the relevant attendance for the user and tour.
+        """
         user = self.context['request'].user
         if user.is_authenticated:
             attendance = Attendance.objects.filter(

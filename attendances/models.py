@@ -5,7 +5,7 @@ from tours.models import Tour
 
 class Attendance(models.Model):
     """
-    The model for attendances, related to User and Tour
+    The model for attendances, related to User and Tour.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     tour = models.ForeignKey(
@@ -26,6 +26,6 @@ class Attendance(models.Model):
 
     def __str__(self):
         """
-        Returns the owner and tour of the attendance
+        Returns the owner and tour of the attendance.
         """
         return f'{self.owner} {self.tour}'

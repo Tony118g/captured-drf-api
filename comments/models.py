@@ -5,7 +5,7 @@ from photos.models import Photo
 
 class Comment(models.Model):
     """
-    The model for comments, related to User and Photo
+    The model for comments, related to User and Photo.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
@@ -16,12 +16,12 @@ class Comment(models.Model):
     class Meta:
         """
         Orders comments by date they were created
-        from newest to oldest
+        from newest to oldest.
         """
         ordering = ['-created_at']
 
     def __str__(self):
         """
-        Returns the content of the comment
+        Returns the content of the comment.
         """
         return self.content

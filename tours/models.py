@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Tour(models.Model):
     """
-    The model for tours
+    The model for tours.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
@@ -31,12 +31,12 @@ class Tour(models.Model):
     class Meta:
         """
         Orders tours by date they were created
-        from newest to oldest
+        from newest to oldest.
         """
         ordering = ['-created_at']
 
     def __str__(self):
         """
-        Returns the id and title of the tour
+        Returns the id and title of the tour.
         """
         return f'{self.id} {self.title}'

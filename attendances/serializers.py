@@ -5,7 +5,7 @@ from .models import Attendance
 
 class AttendanceSerializer(serializers.ModelSerializer):
     """
-    Provides readability for attendance data in API.
+    Serializes attendance data.
     """
     owner = serializers.ReadOnlyField(source='owner.username')
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')

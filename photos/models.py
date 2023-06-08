@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Photo(models.Model):
     """
-    The model for photos, related to Owner/User
+    The model for photos, related to Owner/User.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
@@ -30,12 +30,12 @@ class Photo(models.Model):
     class Meta:
         """
         Orders photos by date they were created
-        from newest to oldest
+        from newest to oldest.
         """
         ordering = ['-created_at']
 
     def __str__(self):
         """
-        Returns the id and title of the photo
+        Returns the id and title of the photo.
         """
         return f'{self.id} {self.title}'

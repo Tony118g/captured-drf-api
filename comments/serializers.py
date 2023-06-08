@@ -5,7 +5,7 @@ from .models import Comment
 
 class CommentSerializer(serializers.ModelSerializer):
     """
-    Provides readability for comment data in API.
+    Serializes comment data.
     """
 
     owner = serializers.ReadOnlyField(source='owner.username')
@@ -16,13 +16,22 @@ class CommentSerializer(serializers.ModelSerializer):
     updated_at = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
+        """
+        Returns true if the user is the object owner.
+        """
         request = self.context['request']
         return request.user == obj.owner
 
     def get_created_at(self, obj):
+        """
+        Returns the time elapsed since the comment was created.
+        """
         return naturaltime(obj.created_at)
 
     def get_updated_at(self, obj):
+        """
+        Returns the time elapsed since the comment was updated.
+        """
         return naturaltime(obj.updated_at)
 
     class Meta:
@@ -42,6 +51,6 @@ class CommentSerializer(serializers.ModelSerializer):
 
 class CommentDetailSerializer(CommentSerializer):
     """
-    Serializer for the Comment model used in the Detail view
+    Serializer for the Comment model used in the Detail view.
     """
     photo = serializers.ReadOnlyField(source='photo.id')

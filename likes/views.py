@@ -18,7 +18,7 @@ class LikeList(generics.ListCreateAPIView):
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
     """
-    Handles retrieving and deleting of likes by id if owned
+    Handles retrieving and deleting of likes by id if owned.
     """
     permission_classes = [IsOwnerOrReadOnly]
     serializer_class = LikeSerializer

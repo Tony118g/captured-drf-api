@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     """
-    The model for profiles
+    The model for profiles.
     """
 
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -20,16 +20,14 @@ class Profile(models.Model):
     class Meta:
         """
         Orders profiles by date they were created
-        from newest to oldest
+        from newest to oldest.
         """
-
         ordering = ['-created_at']
 
     def __str__(self):
         """
-        Returns the owner of the profile
+        Returns the owner of the profile.
         """
-
         return f"{self.owner}'s profile"
 
 
@@ -38,7 +36,6 @@ def create_profile(sender, instance, created, **kwargs):
     Creates a new user profile
     upon the creation of a new user.
     """
-
     if created:
         Profile.objects.create(owner=instance)
 
