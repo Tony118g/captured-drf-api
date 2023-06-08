@@ -6,6 +6,7 @@ This repository contains the backend API setup built to support the ReactJS fron
 
 * [Project Goals](#project-goals)
 * [Technologies Used](#technologies-used)
+* [The Database](#the-database)
 
 ## Project Goals
 This section of the project provides a Django Rest Framework API for the [Captured React web app](https://github.com/Tony118g/captured). The primary goals that this section of the project aims to achieve are as follows:
@@ -19,6 +20,101 @@ This section of the project provides a Django Rest Framework API for the [Captur
 * Provide the means for crud operations where necessary.
 
 Goals pertaining to the entire project can be found [here](https://github.com/Tony118g/captured#project-goals).
+
+## The Database
+
+I used [dbdiagram.io](https://dbdiagram.io/home) to create a visual representation of the database.
+
+![The database schema](documentation/readme-images/database-schema.png)
+
+### The User Model
+* This model contains information about the user and is part of the Django allauth library.
+* It has a one-to-one realtionship with the profile model owner field.
+* It has ForeignKey relationships with the following:
+    * Follower model owner and followed fields.
+    * Photo model owner field.
+    * Comment model owner field.
+    * Like model owner field.
+    * Attendance model owner field
+    * Tour model owner field
+
+### The Profile Model
+* This model contains the following fields:
+    * owner
+    * name
+    * description
+    * image
+    * created_at
+    * updated_at
+* The owner field has a one-to-one relationship with the User model.
+
+### The Photo Model
+* This model contains the following fields:
+    * owner
+    * title
+    * camera_used
+    * lense_used
+    * description
+    * image
+    * created_at
+    * updated_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It has a ForeignKey relationship with the Comment model photo field.
+* It also has a ForeignKey relationship with the Like model photo field.
+
+### The Tour Model
+* This model contains the following fields:
+    * owner
+    * title
+    * description
+    * country
+    * city
+    * price
+    * guide
+    * start_date
+    * end_date
+    * booking_means
+    * image
+    * created_at
+    * updated_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It has a ForeignKey relationship with the Attendance model tour field.
+
+### The Follower Model
+* This model contains the following fields:
+    * owner
+    * followed
+    * created_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It also has a ForeignKey relationship between the followed field and the User model.
+
+### The Comment Model
+* This model contains the following fields:
+    * owner
+    * photo
+    * content
+    * created_at
+    * updated_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It also has a ForeignKey relationship between the photo field and the Photo model.
+
+### The Like Model
+* This model contains the following fields:
+    * owner
+    * photo
+    * created_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It also has a ForeignKey relationship between the photo field and the Photo model.
+
+### The Attendance Model
+* This model contains the following fields:
+    * owner
+    * tour
+    * created_at
+* It has a ForeignKey relationship between the owner field and the User model.
+* It also has a ForeignKey relationship between the tour field and the Tour model.
+
+NB - Serializers were used to add extra fields to some of these models to improve functionality such as the profile_id and profile_image fields.
 
 ## Technologies Used
 
