@@ -5,8 +5,10 @@ Captured is a content sharing platform for photographers. Users can showcase the
 This repository contains the backend API setup built to support the ReactJS frontend and is powered by the Django Rest Framework.
 
 * [Project Goals](#project-goals)
-* [Technologies Used](#technologies-used)
 * [The Database](#the-database)
+* [Technologies Used](#technologies-used)
+* [Testing](#testing)
+    * [Code Validation](#code-validation)
 
 ## Project Goals
 This section of the project provides a Django Rest Framework API for the [Captured React web app](https://github.com/Tony118g/captured). The primary goals that this section of the project aims to achieve are as follows:
@@ -177,6 +179,16 @@ NB - Serializers were used to add extra fields to some of these models to improv
     * Used to create code/content and file structure for the respository.
 * [Heroku](https://dashboard.heroku.com)
     * Used to host the deployed site.
+
+### Testing
+
+#### Code Validation
+
+All python code written by myself for this project was developed following PEP8 guidelines and was run through the [CI Python Linter](https://pep8ci.herokuapp.com/).
+
+* All final Python files presented no warnings or errors.
+
+![Screenshot of python validation results](documentation/testing-images/python-validation-results.png)
 
 ## Deployment and Development
 * The project API was developed using [Gitpod](https://www.gitpod.io/#get-started) to create the code and overall file structure.
