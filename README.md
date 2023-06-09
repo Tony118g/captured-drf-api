@@ -147,6 +147,8 @@ NB - Serializers were used to add extra fields to some of these models to improv
     * The framework used to help develop the project API.
 
 ### Packages
+* [Coverage](https://coverage.readthedocs.io/en/6.4.4/)
+    * Used to produce automated test reports
 * [Pillow](https://pillow.readthedocs.io/en/stable/)
     * Used for image processing and validation.
 * [asgiref](https://pypi.org/project/asgiref/)
@@ -185,6 +187,8 @@ NB - Serializers were used to add extra fields to some of these models to improv
     * Used to provide Cloudinary storage for media files as well as management commands for removing unnecessary files.
 
 ### Other Tools
+* [Dbdiagram.io](https://dbdiagram.io/home)
+    * Used to create the database schema.
 * [Cloudinary](https://cloudinary.com/)
     * Used to store static files and media.
 * [ElephantSQL](https://www.elephantsql.com/)
@@ -277,7 +281,7 @@ I created a total of 63 automated tests which all pass and provide 96% coverage 
 ### Resolved
 * As pointed out in the moments walkthrough, dj-rest-auth has a bug that doesn’t allow users to log out. You can find out more about this issue [here](https://github.com/iMerica/dj-rest-auth/issues/246).
     * The solution to this was to create a custom logout view, where necessary configurations are made to allow correct functionality.
-* A few minor errors occured due to typos in code and incorrect syntaxt however these were easily amended.
+* A few minor errors occured due to typos in code and incorrect syntax however these were easily amended.
 
 ### Unresolved
 * No known bugs were left unresolved to the best of my knowledge.
