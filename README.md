@@ -190,6 +190,60 @@ All python code written by myself for this project was developed following PEP8 
 
 ![Screenshot of python validation results](documentation/testing-images/python-validation-results.png)
 
+## Manual Testing
+
+During development, I carried out a number of manual tests to ensure the correct functionality of the API.
+
+### For logged out users:
+
+**Topic** | **Permission** | **Expected Result** | **Actual Result**
+-------- | ------------------- | ------------------- | -----------------
+All objects | read only | All objects can only be read | Works as expected
+
+### For logged in normal users:
+
+**Topic** | **Permission** | **Expected Result** | **Actual Result**
+-------- | ------------------- | ------------------- | -----------------
+Profile | full crud | User profile can be created, read, updated and deleted | Works as expected
+Photo | full crud | A photo post can be created, read, updated and deleted | Works as expected
+Comment | full crud | A comment can be created, read, updated and deleted | Works as expected
+Like | Create & delete | A like can be created and deleted | Works as expected
+Follower | Create & delete | A follower can be created and deleted | Works as expected
+Tour | read only | Tours can only be read | Works as expected
+Attendance | Create & delete | An attendance can be created and deleted | Works as expected
+
+### For logged in admin users:
+
+**Topic** | **Permission** | **Expected Result** | **Actual Result**
+-------- | ------------------- | ------------------- | -----------------
+Profile | full crud | User profile can be created, read, updated and deleted | Works as expected
+Photo | full crud | A photo post can be created, read, updated and deleted | Works as expected
+Comment | full crud | A comment can be created, read, updated and deleted | Works as expected
+Like | Create & delete | A like can be created and deleted | Works as expected
+Follower | Create & delete | A follower can be created and deleted | Works as expected
+Tour | full crud | Tours  can be created, read, updated and deleted | Works as expected
+Attendance | Create & delete | An attendance can be created and deleted | Works as expected
+
+NB - All of the above tests have been carried out with the presumption that edit and delete functionality are only done on objects owned by the relevant user.
+
+Tests for ownership permissions were also carried out:
+* All objects excluding tours can only be edited and deleted by their respective owners.
+* All tours cannot be edited or deleted by non admin users.
+* All tours can be edited and deleted by admin users regardless of ownership status.
+
+### Testing list orders
+The below tests were carried out to see if objects are listed in the correct order.
+
+**Topic** | **Expected order** |**Result** 
+-------- | ------------------- | ------------------- 
+Profiles | newest to oldest | &check;
+Photos | newest to oldest | &check;
+Comments | newest to oldest | &check;
+Likes | newest to oldest | &check;
+Followers | newest to oldest | &check;
+Tours | newest to oldest | &check;
+Attendances | newest to oldest | &check;
+
 ## Deployment and Development
 * The project API was developed using [Gitpod](https://www.gitpod.io/#get-started) to create the code and overall file structure.
 * [GitHub](https://github.com/) is used to host the repository.
