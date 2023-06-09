@@ -12,7 +12,7 @@ class Tour(models.Model):
     country = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
     price = models.DecimalField(
-        blank=True, max_digits=4, decimal_places=2, default='00.00'
+        blank=True, max_digits=8, decimal_places=2, default='00.00'
         )
     guide = models.CharField(
         max_length=100,
