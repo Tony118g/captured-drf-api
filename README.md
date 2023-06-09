@@ -9,6 +9,8 @@ This repository contains the backend API setup built to support the ReactJS fron
 * [Technologies Used](#technologies-used)
 * [Testing](#testing)
     * [Code Validation](#code-validation)
+    * [Manual Testing](#manual-testing)
+    * [Automated Testing](#automated-testing)
 
 ## Project Goals
 This section of the project provides a Django Rest Framework API for the [Captured React web app](https://github.com/Tony118g/captured). The primary goals that this section of the project aims to achieve are as follows:
@@ -243,6 +245,18 @@ Likes | newest to oldest | &check;
 Followers | newest to oldest | &check;
 Tours | newest to oldest | &check;
 Attendances | newest to oldest | &check;
+
+## Automated Testing
+
+As well as manual tests, I created automated tests for the main functionality of the project. I found this very beneficial in ensuring the site works as intended and it helped pick out a few errors that I would have missed without it.
+
+Tests were created for each app for key features and functionality. I used [coverage](https://pypi.org/project/coverage/) to keep track of the amount of code my tests have covered and generated reports to find out which areas were untested so I could be sure to cover as much code as possible.
+
+I created a total of 63 automated tests which all pass and provide 96% coverage for the project.
+
+![Screenshot of automated tests result](documentation/testing-images/automated-test-results.png)
+
+![Screenshot of automated tests coverage report](documentation/testing-images/coverage-report.png)
 
 ## Deployment and Development
 * The project API was developed using [Gitpod](https://www.gitpod.io/#get-started) to create the code and overall file structure.
