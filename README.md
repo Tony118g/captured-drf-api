@@ -20,6 +20,8 @@ This repository contains the backend API setup built to support the ReactJS fron
     * [Automated Testing](#automated-testing)
     * [Known Bugs](#known-bugs)
 * [Deployment and Development](#deployment-and-development)
+* [Credits](#credits)
+* [Acknowledgements](#acknowledgements)
 
 ## Project Goals
 This section of the project provides a Django Rest Framework API for the [Captured React web app](https://github.com/Tony118g/captured). The primary goals that this section of the project aims to achieve are as follows:
@@ -352,3 +354,23 @@ To set up Cloudinary, follow these steps:
 2. Navigate to the dashboard to view the API Environment Variable.
 
 NB - You are able but not required to change your assigned cloud name to something more memorable.
+
+## Credits
+
+* Code
+    * The creation of this API was aided by instructions in the CI [Moments](https://github.com/Code-Institute-Solutions/drf-api) walkthrough.
+        * By following along with this walkthrough, I was able to set up a base code foundation that I developed further to achieve the desired functionality for this site.
+
+* Content
+    * I used [Cloudinary](https://cloudinary.com/) for image storage.
+    * I used the default images provided in the CI [Moments](https://github.com/Code-Institute-Solutions/drf-api) walkthrough.
+
+## Acknowledgements
+
+This repository was developed as part of a fifth portfolio project for the [Code Institute](https://codeinstitute.net/global/) course in Full Stack Software Development. I would like to thank the following for all of the support throughout the development phase.
+
+* The Code Institute community, including fellow students and staff.
+* My family, friends, and peers who have helped and supported me with suggestions and feedback during development.
+* My mentor, Lauren-Nicole for providing me with advice and guidance throughout the development process.
+
+Antony Guimaraes 2023
